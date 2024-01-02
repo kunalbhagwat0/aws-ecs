@@ -5,14 +5,10 @@ phases:
     commands:
       - echo Logging in to Amazon ECR...
       - aws --version
-      - aws configure set aws_access_key_id AKIAWGBPZ4PE3H7BVAVA
-      - aws configure set aws_secret_access_key I2BXpRrY+6cLhgbP5RpYIo6zANERrEs58QWKsGm9
-      - aws configure set region us-east-1  # Update the region to match your ECR Public registry region
       - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/n2j8r2s0
       - export REPOSITORY_URI=public.ecr.aws/n2j8r2s0/repofor-test
       - export COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - export IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
-
 
   build:
     commands:
