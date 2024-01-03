@@ -1,31 +1,30 @@
 version: 0.2
 
+
 phases:
   pre_build:
     commands:
       - echo Logging in to Amazon ECR...
       - aws --version
-      - aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws/n2j8r2s0
-      - export REPOSITORY_URI=public.ecr.aws/n2j8r2s0/repofor-test
-      - export COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
-      - export IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
-
+      #- $(aws ecr get-login --region ap-south-1 --no-include-email)
+      - aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 425302025161.dkr.ecr.ap-south-1.amazonaws.com     
+      - REPOSITORY_URI=425302025161.dkr.ecr.ap-south-1.amazonaws.com/godxrepo
+      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - IMAGE_TAG=build-$(echo $CODEBUILD_BUILD_ID | awk -F":" '{print $2}')
   build:
     commands:
-      - echo Build started on $(date)
+      - echo Build started on date
       - echo Building the Docker image...
       - docker build -t $REPOSITORY_URI:latest .
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
-
   post_build:
     commands:
-      - echo Build completed on $(date)
+      - echo Build completed on date
       - echo Pushing the Docker Image...
-      - docker push $REPOSITORY_URI:latest
+      - docker push $REPOSITORY_URI:magento-latest
       - docker push $REPOSITORY_URI:$IMAGE_TAG
       - echo Writing image definitions file...
-      - printf '[{"name":"tep-v3-ecr","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
+      - printf '[{"name":"godxrepo","imageUri":"%s"}]' $REPOSITORY_URI:$IMAGE_TAG > imagedefinitions.json
       - cat imagedefinitions.json
-
 artifacts:
-  files: imagedefinitions.json
+    files: imagedefinitions.json
