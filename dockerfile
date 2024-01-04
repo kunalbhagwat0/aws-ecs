@@ -14,7 +14,7 @@ RUN rm -rf /usr/test/aws-ecs
 RUN git clone https://github.com/kunalbhagwat0/aws-ecs.git
 
 # Copy index.html to the correct location
-RUN cp /usr/test/index.html /var/www/html/
+RUN cp /usr/test/aws-ecs/index.html /var/www/html/
 
 # Change ownership to www-data
 RUN chown -R www-data:www-data /var/www/html
