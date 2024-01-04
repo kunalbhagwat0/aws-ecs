@@ -22,7 +22,7 @@ phases:
       - echo Pushing the Docker Image...
       - docker push 425302025161.dkr.ecr.ap-south-1.amazonaws.com/magixrepo:latest
       - echo Writing image definitions file...
-      - printf '[{"name":"dogsworld","imageUri":"425302025161.dkr.ecr.ap-south-1.amazonaws.com/magixrepo"}]' > imagedefinitions.json
+      - printf '[{"name":"dogsworld","imageUri":"425302025161.dkr.ecr.ap-south-1.amazonaws.com/magixrepo:latest"}]' > imagedefinitions.json
       - cat imagedefinitions.json
 artifacts:
     files: imagedefinitions.json
