@@ -10,12 +10,14 @@ RUN apt-get update && apt-get install -y git
 # Clone your GitHub repository
 RUN git clone https://github.com/kunalbhagwat0/aws-ecs.git
 
-# Update the default Apache configuration to point to the index.html file
-RUN echo "ServerName localhost" >> /usr/local/apache2/conf/httpd.conf
-RUN sed -i 's/DocumentRoot "\/usr\/local\/apache2\/htdocs"/DocumentRoot "\/var\/www\/html\/aws-ecs\/hello"/' /usr/local/apache2/conf/httpd.conf
+# Copy index.html to the correct location
+RUN cp /var/www/html/aws-ecs/hello/index.html /var/www/html/
+
+# Change ownership to www-data
+RUN chown www-data:www-data /var/www/html/index.html
 
 # Expose port 80 for Apache
 EXPOSE 80
 
-# Start Apache when the container runs
-CMD ["httpd-foreground"]
+# Restart Apache
+CMD service apache2 restart && apache2-foreground
