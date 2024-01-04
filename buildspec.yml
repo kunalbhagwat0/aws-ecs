@@ -13,8 +13,8 @@ phases:
     commands:
       - echo Build started on date
       - echo Building the Docker image...
-      - docker build -f dockerfile -t magixrepo:latest .
-      - docker tag tep-v3-ecr:nextjs-latest 078010589169.dkr.ecr.ap-south-1.amazonaws.com/tep-v3-ecr:nextjs-latest
+      - docker build -f dockerfile -t magixrepo:latest1 .
+      - docker tag magixrepo:latest1 425302025161.dkr.ecr.ap-south-1.amazonaws.com/magixrepo:latest1
       
   post_build:
     commands:
@@ -22,7 +22,7 @@ phases:
       - echo Pushing the Docker Image...
       - docker push 078010589169.dkr.ecr.ap-south-1.amazonaws.com/magixrepo:latest
       - echo Writing image definitions file...
-      - printf '[{"dogsworld":"node-tep","imageUri":"078010589169.dkr.ecr.ap-south-1.amazonaws.com/tep-v3-ecr:nextjs-latest"}]' > imagedefinitions.json
+      - printf '[{"dogsworld":"node-tep","imageUri":"425302025161.dkr.ecr.ap-south-1.amazonaws.com/magixrepo"}]' > imagedefinitions.json
       - cat imagedefinitions.json
 artifacts:
     files: imagedefinitions.json
