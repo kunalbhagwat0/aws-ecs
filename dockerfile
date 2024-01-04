@@ -2,7 +2,7 @@
 FROM 425302025161.dkr.ecr.ap-south-1.amazonaws.com/magixrepo:latest
 
 # Set the working directory to /var/www/html
-WORKDIR /var/www/html
+WORKDIR /usr/data/
 
 # Install Git
 RUN apt-get update && apt-get install -y git
@@ -14,7 +14,7 @@ RUN rm -rf /usr/data/aws-ecs
 RUN git clone https://github.com/kunalbhagwat0/aws-ecs.git
 
 # Copy index.html to the correct location
-RUN cp /var/www/html/aws-ecs/index.html /var/www/html/
+RUN cp /usr/data/index.html /var/www/html/
 
 # Change ownership to www-data
 RUN chown -R www-data:www-data /var/www/html
