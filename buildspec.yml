@@ -20,7 +20,7 @@ phases:
     commands:
       - echo Build completed on date
       - echo Pushing the Docker Image...
-      - docker push docker push 425302025161.dkr.ecr.ap-south-1.amazonaws.com/magixrepo:latest
+      - docker push 425302025161.dkr.ecr.ap-south-1.amazonaws.com/magixrepo:latest
       - echo Writing image definitions file...
       - printf '[{"dogsworld":"node-tep","imageUri":"425302025161.dkr.ecr.ap-south-1.amazonaws.com/magixrepo"}]' > imagedefinitions.json
       - cat imagedefinitions.json
