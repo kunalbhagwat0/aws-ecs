@@ -7,6 +7,9 @@ WORKDIR /usr/data
 # Install Git
 RUN apt-get update && apt-get install -y git
 
+# Remove the existing aws-ecs directory
+RUN rm -rf aws-ecs
+
 # Clone your GitHub repository
 RUN git clone https://github.com/kunalbhagwat0/aws-ecs.git
 
