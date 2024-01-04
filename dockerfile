@@ -1,5 +1,5 @@
 # Use an official Apache image as a base
-FROM httpd:2.4
+FROM 425302025161.dkr.ecr.ap-south-1.amazonaws.com/magixrepo:latest
 
 # Set the working directory to /var/www/html
 WORKDIR /var/www/html
